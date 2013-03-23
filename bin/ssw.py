@@ -19,7 +19,6 @@ def apply_define(define, options, args, mapper):
   value = re.sub('\$\{(\d+)\}', lambda m:str(args[int(m.group(1)) - 1]),xs[1])
   if name in mapper:
     key = mapper[name][1].replace("--", "")
-    print key
     if None != options[key]:
       value = str(options[key])
 
