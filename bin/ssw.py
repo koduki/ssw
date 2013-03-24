@@ -27,7 +27,7 @@ def parse_defines(defines, optparser):
   for define in defines:
     name = define.split("=")[0]
     if define.count('=') == 1:
-      xs = define.split("#")
+      xs = define.split("#@")
       if len(xs) == 2:
         opts = [s.strip() for s in xs[1].split(",")]
         if opts != []:
@@ -35,7 +35,16 @@ def parse_defines(defines, optparser):
           options[name] = opts
   return options
 
+def parse_description(descripts):
+  usage = ""
+  for line in descripts:
+    if line.count("@usage:"):
+      usage = "usage:" + line.split("@usage:")[1].replace("\n", "")
+
+  return usage
+
 def parse(input):
+  descripts = []
   defines = []
   executes = []
   lines = []
@@ -43,24 +52,27 @@ def parse(input):
   for line in input:
     lines.append(line,)
     target = line.replace(" ", "").replace("\n", "")
-    if target == "#define":
+    if target == "#@descript:":
+      lines = descripts
+    elif target == "#@define:":
       lines = defines
-    elif target == "#main":
+    elif target == "#@main:":
       lines = executes
 
-  return defines, executes
+  return descripts, defines, executes
 
 # 
 # main
 #
 
 # parse
-defines, executes = parse(sys.stdin)
-optparser = OptionParser()
+descripts, defines, executes = parse(sys.stdin)
+usage = parse_description(descripts)
+optparser = OptionParser(usage = usage)
 mapper = parse_defines(defines, optparser)
 
 optparser.add_option("--ssw.debug", action="store_true", default=False, help="ssw debug mode.")
-optparser.add_option("--ssw.workdir", default=".", help="working dir.")
+optparser.add_option("--ssw.workdir", default=".", help="working directory.")
 (options, args) = optparser.parse_args()
 
 is_debug = vars(options)["ssw.debug"]
