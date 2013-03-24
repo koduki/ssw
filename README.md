@@ -2,9 +2,9 @@
 SSW is simple shell wrapper.
 This wrapper give some generally functions your shell script.
 
-* command line paramater check.
-* override variable.
-* help option.
+* check command line paramaters.
+* override variable by option.
+* make help option by comment annotation.
 
 ## HowTo
 
@@ -19,7 +19,7 @@ This wrapper give some generally functions your shell script.
 Using "#define" annotation.
 And If you write comment, this is gen option and help message.
 
-    # define
+    #@ define:
     MSG=${1} # -m, --message, this is simple echo messsage.
     MSG2=${2}/hogehoge # -M, --message2, this is simple echo messsage2.
     INPUT_DIR=. # -t, --target, scan target direcotry.
@@ -27,9 +27,9 @@ And If you write comment, this is gen option and help message.
 
 ### 3. running code
 This is simple shell.
-Using "# main" annotation.
+Using "#@ main:" annotation.
 
-    # main
+    #@ main:
     echo "hello $HOSTNAME `hostname` $MSG"
     echo $MSG2
     echo $INPUT_DIR 
