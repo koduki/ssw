@@ -14,15 +14,13 @@ def apply_defines(defines, options, args, mapper):
   return [apply_define(d, options, args, mapper) for d in defines if d.count('=') == 1]
 
 def apply_define(define, options, args, mapper):
-  xs = define.split('=')
-  name = xs[0]
-  value = re.sub('\$\{(\d+)\}', lambda m:str(args[int(m.group(1)) - 1]),xs[1])
-  if name in mapper:
-    key = mapper[name][1].replace("--", "")
-    if None != options[key]:
-      value = str(options[key])
-
-  return name + '=' + value + "\n"
+  try:
+    xs = define.split('=')
+    name = xs[0]
+    value = re.sub('\$\{(\d+)\}', lambda m:str(args[int(m.group(1)) - 1]),xs[1])
+    return name + '=' + value + "\n"
+  except IndexError:
+    raise ValueError("This line paramater is not found.(" + define.replace("\n", "") + ")")
 
 def parse_defines(defines, optparser):
   options = {}
