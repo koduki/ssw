@@ -82,8 +82,13 @@ workdir = str(vars(options)["ssw.workdir"])
 is_debug = vars(options)["ssw.debug"]
 
 
-# apply
-applied_defines = apply_defines(defines, vars(options), args, mapper)
+try:
+  # apply
+  applied_defines = apply_defines(defines, vars(options), args, mapper)
 
-# execute
-exec_shell(applied_defines, executes, workdir, is_debug)
+  # execute
+  exec_shell(applied_defines, executes, workdir, is_debug)
+except:
+  optparser.print_help()
+  raise
+
