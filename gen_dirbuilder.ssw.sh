@@ -3,14 +3,20 @@ echo "$0"
 echo "$@"
 exec python bin/ssw.py "$@" < "$0"
 !#
+#= descript:
+# $Id$
+# This script is generate mkdir, chmod, chown.
+# output 4 files on working direcotry.
+#
+# usage: %prog [options] MSG1 MSG2
 
-# define
+#= define:
 MSG=${1} # -m, --message, this is simple echo messsage.
 MSG2=${2}/hogehoge # -M, --message2, this is simple echo messsage2.
 INPUT_DIR=. # -t, --target, scan target direcotry.
 DIR_LIST_FILE=dir.list
 
-# main
+#= main:
 echo "hello $HOSTNAME `hostname` $MSG"
 echo $MSG2
 find $INPUT_DIR -type d|awk '{print "echo \"`stat --format=_q_%a %U:%G_q_ "$1"` "$1"\""}'|sed "s/_q_/'/g"|sh > $DIR_LIST_FILE
