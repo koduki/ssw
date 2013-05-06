@@ -1,7 +1,12 @@
 #!/bin/sh
-PWD=`dirname $0`
-exec python ${PWD}/lib/ssw.py "$@" < "$0"
-!#
+SSW_PATH=`dirname $0`/lib/ssw.py
+if [ -e ${SSW_PATH} ]; then
+  exec python ${SSW_PATH} "$@" < "$0"
+else
+  echo "not found ssw.py, this running is native."
+  echo ""
+fi
+
 #@ descript:
 # $Id$
 # This script is generate mkdir, chmod, chown.

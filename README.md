@@ -10,9 +10,13 @@ This wrapper give some generally functions your shell script.
 
 ### 1. loading ssw
     #!/bin/sh
-    PWD=`dirname $0`
-    exec python ${PWD}/lib/ssw.py "$@" < "$0"
-    !#
+    SSW_PATH=`dirname $0`/lib/ssw.py
+    if [ -e ${SSW_PATH} ]; then
+      exec python ${SSW_PATH} "$@" < "$0"
+    else
+      echo "not found ssw.py, this running is native."
+      echo ""
+    fi
 
 ### 2. define variable
 Using "#@define" annotation.
