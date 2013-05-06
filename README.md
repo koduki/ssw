@@ -10,9 +10,8 @@ This wrapper give some generally functions your shell script.
 
 ### 1. loading ssw
     #!/bin/sh
-    echo "$0"
-    echo "$@"
-    exec python bin/ssw.py "$@" < "$0"
+    PWD=`dirname $0`
+    exec python ${PWD}/lib/ssw.py "$@" < "$0"
     !#
 
 ### 2. define variable

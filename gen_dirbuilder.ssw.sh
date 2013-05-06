@@ -1,7 +1,6 @@
 #!/bin/sh
-echo "$0"
-echo "$@"
-exec python bin/ssw.py "$@" < "$0"
+PWD=`dirname $0`
+exec python ${PWD}/lib/ssw.py "$@" < "$0"
 !#
 #@ descript:
 # $Id$
