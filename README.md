@@ -15,7 +15,7 @@ This wrapper give some generally functions your shell script.
     !#
 
 ### 2. define variable
-Using "#define" annotation.
+Using "#@define" annotation.
 And If you write comment, this is gen option and help message.
 
     #@ define:
