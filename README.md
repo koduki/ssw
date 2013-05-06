@@ -19,9 +19,9 @@ Using "#define" annotation.
 And If you write comment, this is gen option and help message.
 
     #@ define:
-    MSG=${1} # -m, --message, this is simple echo messsage.
-    MSG2=${2}/hogehoge # -M, --message2, this is simple echo messsage2.
-    INPUT_DIR=. # -t, --target, scan target direcotry.
+    MSG=${1} #@ -m, --message, this is simple echo messsage.
+    MSG2=${2}/hogehoge #@ -M, --message2, this is simple echo messsage2.
+    INPUT_DIR=. #@ -t, --target, scan target direcotry.
     DIR_LIST_FILE=dir.list
 
 ### 3. running code
