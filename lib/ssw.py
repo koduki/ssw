@@ -88,7 +88,10 @@ try:
 
   # execute
   exec_shell(applied_defines, executes, workdir, is_debug)
-except:
+except Exception, e:
+  print(e.message)
+  print
   optparser.print_help()
-  raise
+  if is_debug:
+    raise
 
